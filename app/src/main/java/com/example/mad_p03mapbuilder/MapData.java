@@ -1,6 +1,6 @@
 package com.example.mad_p03mapbuilder;
 
-...;
+
 
 import java.util.Random;
 

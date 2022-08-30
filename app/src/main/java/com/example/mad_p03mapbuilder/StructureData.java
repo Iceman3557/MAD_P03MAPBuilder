@@ -1,7 +1,5 @@
 package com.example.mad_p03mapbuilder;
 
-...;
-
 import java.util.Arrays;
 import java.util.List;
 

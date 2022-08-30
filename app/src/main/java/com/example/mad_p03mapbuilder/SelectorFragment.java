@@ -1,14 +1,23 @@
 package com.example.mad_p03mapbuilder;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,18 +28,17 @@ public class SelectorFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM2 = "parama2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private StructureData dataList = StructureData.get();
+    private String parama2 = "";
 
     public SelectorFragment() {
         // Required empty public constructor
     }
 
-    /**
+    /*
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
@@ -39,23 +47,13 @@ public class SelectorFragment extends Fragment {
      * @return A new instance of fragment SelectorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectorFragment newInstance(StructureData data) {
+    public static SelectorFragment newInstance() {
         SelectorFragment fragment = new SelectorFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,8 +62,64 @@ public class SelectorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_selector, container, false);
         RecyclerView rv = view.findViewById(R.id.selectorRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        MyAdapter myAdapter = new MyAdapter(data);
+        MyAdapter myAdapter = new MyAdapter(dataList);
         rv.setAdapter(myAdapter);
         return view;
+
+
     }
-}
+
+
+    private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+        private CommonData viewModel;
+        StructureData dataList;
+
+        public MyAdapter(StructureData dataList)
+        {
+            this.dataList = dataList;
+        }
+
+        @Override
+        public int getItemCount()
+        {
+            return dataList.size();
+        }
+
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewtype)
+        {
+            LayoutInflater li = LayoutInflater.from(getActivity());
+            return new MyViewHolder(li,parent);
+        }
+
+        @Override
+        public void onBindViewHolder (MyViewHolder vh, int index)
+        {
+            vh.itemName.setText(dataList.get(index).getLabel());
+            int id = dataList.get(index).getDrawableId();
+            vh.itemButton.setImageDrawable(getResources().getDrawable(id));
+            viewModel = new ViewModelProvider(getActivity(), (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(CommonData.class);
+
+            vh.itemButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewModel.setValue(id);
+                }
+
+            });
+
+        };
+    }// END OF ADAPTER
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView itemName;
+        ImageButton itemButton;
+
+        public MyViewHolder(@NonNull LayoutInflater li, ViewGroup parent){
+            super(li.inflate(R.layout.list_selection,parent,false));
+            itemName = (TextView) itemView.findViewById(R.id.locationName);
+            itemButton = (ImageButton) itemView.findViewById(R.id.location);
+
+        }
+    }// END OF MYVIEWHOLDER
+}//END OF SELECTORFRAGMENT

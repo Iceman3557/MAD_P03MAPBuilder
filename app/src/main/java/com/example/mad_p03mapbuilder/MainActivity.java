@@ -12,13 +12,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StructureData structureData = (StructureData)
-
-        FragmentManager frag = getSupportFragmentManager();
-        SelectorFragment selectorFragment = (SelectorFragment) frag.findFragmentById(R.id.selector);
+        FragmentManager fg = getSupportFragmentManager();
+        SelectorFragment selectorFragment = (SelectorFragment) fg.findFragmentById(R.id.selector);
         if (selectorFragment == null){
-            selectorFragment = new SelectorFragment(data);
-            frag.beginTransaction().add(R.id.selector,selectorFragment).commit();
+            selectorFragment = new SelectorFragment();
+            fg.beginTransaction().add(R.id.selector,selectorFragment).commit();
         }
     }
 }

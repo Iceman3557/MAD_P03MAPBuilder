@@ -1,4 +1,4 @@
-package com.example.mad_p03mapbuilder; ...;
+package com.example.mad_p03mapbuilder;
 
 /**
  * Represents a single grid square in the map. Each map element has both terrain and an optional
