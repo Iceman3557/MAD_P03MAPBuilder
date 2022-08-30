@@ -3,6 +3,8 @@ package com.example.mad_p03mapbuilder;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +39,7 @@ public class SelectorFragment extends Fragment {
      * @return A new instance of fragment SelectorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectorFragment newInstance(String param1, String param2) {
+    public static SelectorFragment newInstance(StructureData data) {
         SelectorFragment fragment = new SelectorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -59,6 +61,11 @@ public class SelectorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selector, container, false);
+        View view = inflater.inflate(R.layout.fragment_selector, container, false);
+        RecyclerView rv = view.findViewById(R.id.selectorRecyclerView);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        MyAdapter myAdapter = new MyAdapter(data);
+        rv.setAdapter(myAdapter);
+        return view;
     }
 }
