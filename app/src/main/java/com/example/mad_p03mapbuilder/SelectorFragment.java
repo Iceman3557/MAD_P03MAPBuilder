@@ -61,7 +61,7 @@ public class SelectorFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_selector, container, false);
         RecyclerView rv = view.findViewById(R.id.selectorRecyclerView);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         MyAdapter myAdapter = new MyAdapter(dataList);
         rv.setAdapter(myAdapter);
         return view;
@@ -98,7 +98,7 @@ public class SelectorFragment extends Fragment {
             vh.itemName.setText(dataList.get(index).getLabel());
             int id = dataList.get(index).getDrawableId();
             vh.itemButton.setImageDrawable(getResources().getDrawable(id));
-            viewModel = new ViewModelProvider(getActivity(), (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(CommonData.class);
+          /*  viewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
 
             vh.itemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,7 +106,7 @@ public class SelectorFragment extends Fragment {
                     viewModel.setValue(id);
                 }
 
-            });
+            });*/
 
         };
     }// END OF ADAPTER

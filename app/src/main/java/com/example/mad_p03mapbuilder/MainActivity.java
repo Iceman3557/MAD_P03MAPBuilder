@@ -18,5 +18,10 @@ public class MainActivity extends AppCompatActivity {
             selectorFragment = new SelectorFragment();
             fg.beginTransaction().add(R.id.selector,selectorFragment).commit();
         }
+        MapFragment mapFragment = (MapFragment) fg.findFragmentById(R.id.map);
+        if (mapFragment == null){
+            mapFragment = new MapFragment();
+            fg.beginTransaction().add(R.id.map,mapFragment).commit();
+        }
     }
 }
