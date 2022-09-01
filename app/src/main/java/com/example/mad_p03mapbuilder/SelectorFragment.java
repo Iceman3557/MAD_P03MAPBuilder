@@ -32,7 +32,7 @@ public class SelectorFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private StructureData dataList = StructureData.get();
-    private String parama2 = "";
+    private CommonData bviewModel;
 
     public SelectorFragment() {
         // Required empty public constructor
@@ -98,15 +98,15 @@ public class SelectorFragment extends Fragment {
             vh.itemName.setText(dataList.get(index).getLabel());
             int id = dataList.get(index).getDrawableId();
             vh.itemButton.setImageDrawable(getResources().getDrawable(id));
-          /*  viewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
+            bviewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
 
             vh.itemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    viewModel.setValue(id);
+                    bviewModel.setValue(id);
                 }
 
-            });*/
+            });
 
         };
     }// END OF ADAPTER

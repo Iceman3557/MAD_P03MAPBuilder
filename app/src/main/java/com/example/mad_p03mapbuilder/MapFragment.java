@@ -36,8 +36,7 @@ public class MapFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private MapData mapData = MapData.get();
-
-    private String parama2 = "";
+    private CommonData aviewModel;
 
     public MapFragment() {
         // Required empty public constructor
@@ -105,20 +104,23 @@ public class MapFragment extends Fragment {
             int row = index % mapData.HEIGHT;
             int col = index / mapData.WIDTH;
 
-            vh.tl.setImageDrawable(getResources().getDrawable(mapData.get(col,row).getNorthWest()));
-            vh.tr.setImageDrawable(getResources().getDrawable(mapData.get(col,row).getNorthEast()));
-            vh.br.setImageDrawable(getResources().getDrawable(mapData.get(col,row).getSouthEast()));
-            vh.bl.setImageDrawable(getResources().getDrawable(mapData.get(col,row).getSouthWest()));
+            vh.tl.setImageDrawable(getResources().getDrawable(mapData.get(row,col).getNorthWest()));
+            vh.tr.setImageDrawable(getResources().getDrawable(mapData.get(row,col).getNorthEast()));
+            vh.br.setImageDrawable(getResources().getDrawable(mapData.get(row,col).getSouthEast()));
+            vh.bl.setImageDrawable(getResources().getDrawable(mapData.get(row,col).getSouthWest()));
 
-          /*  viewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
+            aviewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
 
-            vh.itemButton.setOnClickListener(new View.OnClickListener() {
+            vh.lm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    viewModel.setValue(id);
+                    int id = aviewModel.getValue();
+                    if (id != 0) {
+                        vh.lm.setImageDrawable(getResources().getDrawable(id));
+                    }
                 }
 
-            });*/
+            });
 
         };
     }// END OF ADAPTER
