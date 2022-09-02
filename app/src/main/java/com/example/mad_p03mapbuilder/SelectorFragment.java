@@ -1,5 +1,6 @@
 package com.example.mad_p03mapbuilder;
 
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.LayoutInflater;
@@ -97,6 +100,7 @@ public class SelectorFragment extends Fragment {
         {
             vh.itemName.setText(dataList.get(index).getLabel());
             int id = dataList.get(index).getDrawableId();
+            int check = 0;
             vh.itemButton.setImageDrawable(getResources().getDrawable(id));
             bviewModel = new ViewModelProvider(requireActivity()).get(CommonData.class);
 
@@ -106,6 +110,26 @@ public class SelectorFragment extends Fragment {
                     bviewModel.setValue(id);
                 }
 
+            });
+
+            vh.itemButton.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            v.getBackground().clearColorFilter();
+                            v.invalidate();
+                            break;
+                        }
+                    }
+
+                    return false;
+                }
             });
 
         };

@@ -114,8 +114,8 @@ public class MapFragment extends Fragment {
             vh.lm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int id = aviewModel.getValue();
-                    if (id != 0) {
+                    Integer id = aviewModel.getValue();
+                    if (id != null) {
                         vh.lm.setImageDrawable(getResources().getDrawable(id));
                     }
                 }
